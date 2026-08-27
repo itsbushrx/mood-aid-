@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Emergency Button 🎮</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #090b14;
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+button {
+  font-family: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* =========================
+   HOME
+========================= */
+
+#home {
+  min-height: 100vh;
+  padding: 45px 20px;
+  text-align: center;
+  background:
+    radial-gradient(circle at top, #293154 0%, #111426 38%, #090b14 75%);
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 15px;
+  border: 1px solid #ffffff25;
+  border-radius: 30px;
+  color: #9ea6c0;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+#home h1 {
+  font-size: clamp(42px, 8vw, 76px);
+  line-height: .9;
+  letter-spacing: -4px;
+  margin: 25px 0 15px;
+}
+
+.subtitle {
+  max-width: 570px;
+  margin: auto;
+  color: #aeb4c8;
+  line-height: 1.6;
+}
+
+.moods {
+  width: min(760px, 100%);
+  margin: 40px auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.mood {
+  border: 1px solid #ffffff12;
+  border-radius: 23px;
+  padding: 25px;
+  min-height: 135px;
+  text-align: left;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(145deg, #151a2b, #20263c);
+  transition: .2s;
+  box-shadow: 0 12px 40px #0004;
+}
+
+.mood:hover {
+  transform: translateY(-6px);
+  border-color: #ffffff40;
+  box-shadow: 0 18px 50px #0007;
+}
+
+.mood .emoji {
+  font-size: 34px;
+}
+
+.mood strong {
+  display: block;
+  font-size: 20px;
+  margin-top: 9px;
+}
+
+.mood span {
+  display: block;
+  color: #aeb4c8;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.mood:last-child {
+  grid-column: 1 / -1;
+  text-align: center;
+}
+
+/* =========================
+   GAME SCREEN
+========================= */
+
+#gameScreen {
+  min-height: 100vh;
+  padding: 30px 20px 60px;
+  background:
+    radial-gradient(circle at top, #252c4b 0%, #111426 40%, #090b14 80%);
+  text-align: center;
+}
+
+.back {
+  border: 0;
+  background: none;
+  color: #9ea6c0;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.back:hover {
+  color: white;
+}
+
+.game {
+  width: min(820px, 100%);
+  min-height: 540px;
+  margin: auto;
+  padding: 30px;
+  background: #111625;
+  border: 1px solid #ffffff15;
+  border-radius: 30px;
+  box-shadow: 0 25px 80px #0007;
+}
+
+.game h2 {
+  font-size: 35px;
+  margin: 8px 0;
+}
+
+.game p {
+  color: #aeb4c8;
+  line-height: 1.6;
+}
+
+.emoji-title {
+  font-size: 45px;
+}
+
+.big-button {
+  margin-top: 20px;
+  padding: 16px 25px;
+  border: 0;
+  border-radius: 16px;
+  background: #eeeae0;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.big-button:hover {
+  transform: scale(1.04);
+}
+
+.score {
+  margin: 15px;
+  font-family: monospace;
+  font-size: 20px;
+  color: #8ee0bd;
+  font-weight: bold;
+}
+
+.timer {
+  font-family: monospace;
+  font-size: 28px;
+  margin: 12px;
+}
+
+/* =========================
+   1. ANGRY BIRD GAME
+========================= */
+
+#birdArea {
+  position: relative;
+  height: 350px;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 22px;
+  background:
+    linear-gradient(#74c9ff 0%, #b9ecff 70%, #7acb68 70%);
+}
+
+.bird {
+  position: absolute;
+  width: 65px;
+  height: 65px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 32px;
+  background: #e84747;
+  box-shadow: 0 5px 15px #0005;
+  animation: birdPop .15s;
+}
+
+.bird:hover {
+  transform: scale(1.15);
+}
+
+@keyframes birdPop {
+  from {
+    transform: scale(.2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.combo {
+  font-size: 16px;
+  color: #ffcf5a;
+  min-height: 22px;
+}
+
+/* =========================
+   2. MATCHING GAME
+========================= */
+
+.memory-grid {
+  max-width: 520px;
+  margin: 25px auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.card {
+  aspect-ratio: 1;
+  border: 0;
+  border-radius: 16px;
+  background: #29314d;
+  color: transparent;
+  font-size: 32px;
+  cursor: pointer;
+  transition: transform .2s, background .2s;
+}
+
+.card:hover {
+  transform: scale(1.04);
+}
+
+.card.flipped {
+  background: #6d7fbd;
+  color: white;
+}
+
+.card.matched {
+  background: #8ee0bd;
+  color: #111;
+  cursor: default;
+}
+
+/* =========================
+   3. DART GAME
+========================= */
+
+#dartArea {
+  position: relative;
+  height: 350px;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: 22px;
+  background:
+    linear-gradient(#1c2440, #0b0e1a);
+}
+
+.dart-target {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: crosshair;
+  background:
+    radial-gradient(
+      circle,
+      #111 0 12%,
+      white 12% 25%,
+      #e14b5a 25% 43%,
+      white 43% 62%,
+      #e14b5a 62% 100%
+    );
+  box-shadow: 0 0 25px #0008;
+}
+
+.arrow {
+  position: absolute;
+  font-size: 38px;
+  pointer-events: none;
+  transition: all .35s ease-out;
+}
+
+.dart-message {
+  min-height: 35px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* =========================
+   4. CAR RACING
+========================= */
+
+#raceArea {
+  position: relative;
+  width: min(430px, 100%);
+  height: 400px;
+  margin: 20px auto;
+  overflow: hidden;
+  border-left: 12px solid #777;
+  border-right: 12px solid #777;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #282d36 0px,
+      #282d36 45px,
+      #eeeeee 45px,
+      #eeeeee 85px
+    );
+  background-size: 100% 85px;
+  animation: roadMove .7s linear infinite;
+}
+
+@keyframes roadMove {
+  to {
+    background-position-y: 85px;
+  }
+}
+
+.car {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 52px;
+  z-index: 5;
+}
+
+.enemy-car {
+  position: absolute;
+  font-size: 48px;
+  z-index: 4;
+}
+
+.road-line {
+  position: absolute;
+  width: 8px;
+  height: 60px;
+  background: white;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.control {
+  width: 75px;
+  height: 55px;
+  border: 0;
+  border-radius: 14px;
+  background: #292f46;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* =========================
+   5. DON'T CLICK
+========================= */
+
+.dont-click-area {
+  padding: 50px 20px;
+}
+
+.dont-button {
+  width: min(320px, 90%);
+  height: 150px;
+  border: 0;
+  border-radius: 25px;
+  background: #d94b62;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 15px 35px #0007;
+  transition: .15s;
+}
+
+.dont-button:hover {
+  transform: scale(1.03);
+}
+
+.click-count {
+  margin-top: 25px;
+  font-family: monospace;
+  color: #9ea6c0;
+}
+
+.final-message {
+  margin-top: 25px;
+  font-size: 24px;
+  min-height: 80px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:650px) {
+
+  #home {
+    padding-top: 30px;
+  }
+
+  .moods {
+    grid-template-columns: 1fr;
+  }
+
+  .mood:last-child {
+    grid-column: auto;
+  }
+
+  .game {
+    padding: 20px;
+  }
+
+  .memory-grid {
+    gap: 7px;
+  }
+
+  #birdArea,
+  #dartArea {
+    height: 300px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HOME
+========================= -->
+
+<section id="home">
+
+  <div class="badge">
+    EMERGENCY ENTERTAINMENT PROTOCOL
+  </div>
+
+  <h1>
+    HOW ARE WE<br>
+    DOING TODAY?
+  </h1>
+
+  <p class="subtitle">
+    No speeches. No inspirational quotes.
+    Pick your current condition and we'll deal with it accordingly.
+  </p>
+
+  <div class="moods">
+
+    <button class="mood" onclick="startGame('angry')">
+      <div class="emoji">😤</div>
+      <strong>I'm annoyed</strong>
+      <span>There are birds. They need to be clicked.</span>
+    </button>
+
+    <button class="mood" onclick="startGame('matching')">
+      <div class="emoji">🥱</div>
+      <strong>I'm tired</strong>
+      <span>Flip things. Find the matching pairs.</span>
+    </button>
+
+    <button class="mood" onclick="startGame('darts')">
+      <div class="emoji">🫠</div>
+      <strong>Everything sucks</strong>
+      <span>Take aim. Throw things at targets.</span>
+    </button>
+
+    <button class="mood" onclick="startGame('racing')">
+      <div class="emoji">😐</div>
+      <strong>I'm bored</strong>
+      <span>Get in the car. Try not to crash.</span>
+    </button>
+
+    <button class="mood" onclick="startGame('button')">
+      <div class="emoji">🤷</div>
+      <strong>I don't even know</strong>
+      <span>Whatever you do, don't click the button.</span>
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     GAME SCREEN
+========================= -->
+
+<section id="gameScreen" class="hidden">
+
+  <button class="back" onclick="goHome()">
+    ← retreat to headquarters
+  </button>
+
+  <div id="game" class="game"></div>
+
+</section>
+
+
+<script>
+
+/* =========================
+   GENERAL
+========================= */
+
+let game = document.getElementById("game");
+let gameScreen = document.getElementById("gameScreen");
+let home = document.getElementById("home");
+
+function openGame(content) {
+  home.classList.add("hidden");
+  gameScreen.classList.remove("hidden");
+  game.innerHTML = content;
+}
+
+function goHome() {
+  gameScreen.classList.add("hidden");
+  home.classList.remove("hidden");
+}
+
+function startGame(type) {
+
+  if (type === "angry") angryBirds();
+  if (type === "matching") matchingGame();
+  if (type === "darts") dartGame();
+  if (type === "racing") racingGame();
+  if (type === "button") dontClick();
+}
+
+
+/* =========================================================
+   1. ANGRY BIRD CLICKING
+========================================================= */
+
+function angryBirds() {
+
+  openGame(`
+    <div class="emoji-title">🐦</div>
+
+    <h2>DESTROY THE ANGRY BIRDS</h2>
+
+    <p>
+      You have 25 seconds.<br>
+      Click as many angry birds as possible.
+    </p>
+
+    <div class="timer">
+      TIME: <span id="birdTimer">25</span>
+    </div>
+
+    <div class="score">
+      SCORE: <span id="birdScore">0</span>
+    </div>
+
+    <div class="combo">
+      COMBO: <span id="combo">0</span>
+    </div>
+
+    <div id="birdArea"></div>
+  `);
+
+  let area = document.getElementById("birdArea");
+  let score = 0;
+  let combo = 0;
+  let time = 25;
+
+  function spawnBird() {
+
+    let bird = document.createElement("button");
+
+    bird.className = "bird";
+
+    let birds = ["🐦", "🐤", "🐧", "🦜"];
+
+    bird.textContent =
+      birds[Math.floor(Math.random() * birds.length)];
+
+    bird.style.left =
+      Math.random() * (area.clientWidth - 70) + "px";
+
+    bird.style.top =
+      Math.random() * (area.clientHeight - 70) + "px";
+
+    bird.onclick = function() {
+
+      score++;
+      combo++;
+
+      document.getElementById("birdScore").textContent = score;
+      document.getElementById("combo").textContent = combo;
+
+      bird.remove();
+
+      spawnBird();
+    };
+
+    area.appendChild(bird);
+  }
+
+  for (let i = 0; i < 5; i++) {
+    spawnBird();
+  }
+
+  let timer = setInterval(function() {
+
+    time--;
+
+    document.getElementById("birdTimer").textContent = time;
+
+    if (time <= 0) {
+
+      clearInterval(timer);
+
+      area.innerHTML = "";
+
+      let message;
+
+      if (score >= 50) {
+        message = "WHAT DID THOSE BIRDS EVER DO TO YOU? 😭";
+      } else if (score >= 30) {
+        message = "Okay. Those birds are definitely filing a complaint.";
+      } else if (score >= 15) {
+        message = "Respectable bird destruction.";
+      } else {
+        message = "The birds survived. Barely.";
+      }
+
+      game.innerHTML = `
+        <div class="emoji-title">💥</div>
+
+        <h2>MISSION COMPLETE</h2>
+
+        <div class="result">
+          ${score} birds clicked.
+        </div>
+
+        <p>${message}</p>
+
+        <br>
+
+        <button class="big-button"
+                onclick="angryBirds()">
+          DESTROY MORE BIRDS
+        </button>
+      `;
+    }
+
+  }, 1000);
+}
+
+
+/* =========================================================
+   2. MATCHING PAIRS
+========================================================= */
+
+function matchingGame() {
+
+  let symbols = [
+    "🐸","🐸",
+    "🍕","🍕",
+    "🚗","🚗",
+    "🎮","🎮",
+    "🐱","🐱",
+    "🚀","🚀",
+    "🍩","🍩",
+    "👽","👽"
+  ];
+
+  symbols.sort(() => Math.random() - 0.5);
+
+  openGame(`
+    <div class="emoji-title">🧠</div>
+
+    <h2>MATCHING MAYHEM</h2>
+
+    <p>
+      Flip two cards.<br>
+      Find all the matching pairs.
+    </p>
+
+    <div class="score">
+      MATCHES: <span id="matches">0</span>/8
+    </div>
+
+    <div class="memory-grid" id="memoryGrid"></div>
+
+    <div id="memoryMessage"></div>
+  `);
+
+  let grid = document.getElementById("memoryGrid");
+
+  let first = null;
+  let second = null;
+  let locked = false;
+  let matches = 0;
+
+  symbols.forEach(symbol => {
+
+    let card = document.createElement("button");
+
+    card.className = "card";
+
+    card.textContent = symbol;
+
+    card.dataset.symbol = symbol;
+
+    card.onclick = function() {
+
+      if (locked) return;
+
+      if (card.classList.contains("matched")) return;
+
+      if (card === first) return;
+
+      card.classList.add("flipped");
+
+      if (!first) {
+
+        first = card;
+
+        return;
+      }
+
+      second = card;
+
+      locked = true;
+
+      if (
+        first.dataset.symbol ===
+        second.dataset.symbol
+      ) {
+
+        first.classList.add("matched");
+        second.classList.add("matched");
+
+        matches++;
+
+        document.getElementById("matches")
+          .textContent = matches;
+
+        first = null;
+        second = null;
+
+        locked = false;
+
+        if (matches === 8) {
+
+          document.getElementById("memoryMessage").innerHTML = `
+
+            <div class="result">
+              🧠 BRAIN FUNCTION CONFIRMED.
+            </div>
+
+            <p>
+              You found all the pairs.
+            </p>
+
+            <br>
+
+            <button class="big-button"
+                    onclick="matchingGame()">
+              PLAY AGAIN
+            </button>
+          `;
+        }
+
+      } else {
+
+        setTimeout(function() {
+
+          first.classList.remove("flipped");
+          second.classList.remove("flipped");
+
+          first = null;
+          second = null;
+
+          locked = false;
+
+        }, 700);
+      }
+    };
+
+    grid.appendChild(card);
+  });
+}
+
+
+/* =========================================================
+   3. ARROWS + DARTS
+========================================================= */
+
+function dartGame() {
+
+  openGame(`
+    <div class="emoji-title">🏹</div>
+
+    <h2>TARGET PRACTICE</h2>
+
+    <p>
+      Hit the target before it moves.<br>
+      15 hits to win.
+    </p>
+
+    <div class="score">
+      HITS: <span id="dartScore">0</span>/15
+    </div>
+
+    <div class="timer">
+      TIME: <span id="dartTimer">30</span>
+    </div>
+
+    <div class="dart-message" id="dartMessage">
+      AIM...
+    </div>
+
+    <div id="dartArea"></div>
+  `);
+
+  let area = document.getElementById("dartArea");
+
+  let score = 0;
+  let time = 30;
+
+  function placeTarget() {
+
+    let target = document.createElement("div");
+
+    target.className = "dart-target";
+
+    target.style.left =
+      Math.random() * (area.clientWidth - 120) + "px";
+
+    target.style.top =
+      Math.random() * (area.clientHeight - 120) + "px";
+
+    target.onclick = function(event) {
+
+      let arrow = document.createElement("div");
+
+      arrow.className = "arrow";
+
+      arrow.textContent = "🏹";
+
+      arrow.style.left = "20px";
+      arrow.style.top =
+        event.offsetY + "px";
+
+      area.appendChild(arrow);
+
+      setTimeout(() => {
+        arrow.style.left =
+          target.offsetLeft + 35 + "px";
+
+        arrow.style.top =
+          target.offsetTop + 35 + "px";
+      }, 10);
+
+      setTimeout(() => {
+
+        arrow.remove();
+
+        score++;
+
+        document.getElementById("dartScore")
+          .textContent = score;
+
+        document.getElementById("dartMessage")
+          .textContent =
+          score % 5 === 0
+          ? "🔥 BULLSEYE STREAK!"
+          : "🎯 NICE SHOT!";
+
+        target.remove();
+
+        if (score >= 15) {
+
+          clearInterval(timer);
+
+          game.innerHTML = `
+            <div class="emoji-title">🏆</div>
+
+            <h2>TARGETS DEFEATED</h2>
+
+            <div class="result">
+              15 / 15
+            </div>
+
+            <p>
+              Absolutely unnecessary levels of accuracy.
+            </p>
+
+            <br>
+
+            <button class="big-button"
+                    onclick="dartGame()">
+              SHOOT AGAIN
+            </button>
+          `;
+
+          return;
+        }
+
+        placeTarget();
+      };
+    };
+
+    area.appendChild(target);
+  }
+
+  placeTarget();
+
+  let timer = setInterval(function() {
+
+    time--;
+
+    document.getElementById("dartTimer")
+      .textContent = time;
+
+    if (time <= 0) {
+
+      clearInterval(timer);
+
+      game.innerHTML = `
+        <div class="emoji-title">💀</div>
+
+        <h2>TIME'S UP</h2>
+
+        <div class="result">
+          ${score} / 15
+        </div>
+
+        <p>
+          The targets are currently celebrating.
+        </p>
+
+        <br>
+
+        <button class="big-button"
+                onclick="dartGame()">
+          RUN IT BACK
+        </button>
+      `;
+    }
+
+  }, 1000);
+}
+
+
+/* =========================================================
+   4. CAR RACING
+========================================================= */
+
+function racingGame() {
+
+  openGame(`
+    <div class="emoji-title">🏎️</div>
+
+    <h2>EMERGENCY GRAND PRIX</h2>
+
+    <p>
+      Avoid the traffic.<br>
+      Survive as long as possible.
+    </p>
+
+    <div class="score">
+      DISTANCE: <span id="distance">0</span> m
+    </div>
+
+    <div id="raceArea">
+
+      <div class="car" id="playerCar">
+        🏎️
+      </div>
+
+    </div>
+
+    <div class="controls">
+
+      <button class="control"
+              onclick="moveCar(-1)">
+        ◀
+      </button>
+
+      <button class="control"
+              onclick="moveCar(1)">
+        ▶
+      </button>
+
+    </div>
+
+    <p class="tiny">
+      Keyboard: use ← and →
+    </p>
+  `);
+
+  let area = document.getElementById("raceArea");
+  let car = document.getElementById("playerCar");
+
+  let lane = 1;
+  let distance = 0;
+  let running = true;
+
+  let lanes = [18, 43, 68];
+
+  car.style.left = lanes[lane] + "%";
+
+  window.moveCar = function(direction) {
+
+    if (!running) return;
+
+    lane += direction;
+
+    if (lane < 0) lane = 0;
+    if (lane > 2) lane = 2;
+
+    car.style.left = lanes[lane] + "%";
+  };
+
+  document.onkeydown = function(event) {
+
+    if (event.key === "ArrowLeft") {
+      moveCar(-1);
+    }
+
+    if (event.key === "ArrowRight") {
+      moveCar(1);
+    }
+  };
+
+  function spawnEnemy() {
+
+    if (!running) return;
+
+    let enemy = document.createElement("div");
+
+    enemy.className = "enemy-car";
+
+    enemy.textContent =
+      ["🚙","🚕","🚓","🚗"][Math.floor(Math.random() * 4)];
+
+    let enemyLane =
+      Math.floor(Math.random() * 3);
+
+    enemy.style.left =
+      lanes[enemyLane] + "%";
+
+    enemy.style.top = "-60px";
+
+    area.appendChild(enemy);
+
+    let position = -60;
+
+    let movement = setInterval(function() {
+
+      if (!running) {
+
+        clearInterval(movement);
+        enemy.remove();
+
+        return;
+      }
+
+      position += 5;
+
+      enemy.style.top = position + "px";
+
+      let carRect = car.getBoundingClientRect();
+      let enemyRect = enemy.getBoundingClientRect();
+
+      let collision =
+        carRect.left < enemyRect.right &&
+        carRect.right > enemyRect.left &&
+        carRect.top < enemyRect.bottom &&
+        carRect.bottom > enemyRect.top;
+
+      if (collision) {
+
+        running = false;
+        clearInterval(movement);
+
+        game.innerHTML = `
+          <div class="emoji-title">💥</div>
+
+          <h2>YOU CRASHED</h2>
+
+          <div class="result">
+            ${distance} metres
+          </div>
+
+          <p>
+            The insurance company has been notified.
+          </p>
+
+          <br>
+
+          <button class="big-button"
+                  onclick="racingGame()">
+            DRIVE AGAIN
+          </button>
+        `;
+      }
+
+      if (position > 430) {
+
+        clearInterval(movement);
+        enemy.remove();
+      }
+
+    }, 40);
+  }
+
+  let distanceTimer = setInterval(function() {
+
+    if (!running) {
+
+      clearInterval(distanceTimer);
+      return;
+    }
+
+    distance += 10;
+
+    document.getElementById("distance")
+      .textContent = distance;
+
+  }, 500);
+
+  let enemyTimer = setInterval(function() {
+
+    if (!running) {
+
+      clearInterval(enemyTimer);
+      return;
+    }
+
+    spawnEnemy();
+
+  }, 900);
+}
+
+
+/* =========================================================
+   5. DON'T CLICK THE BUTTON
+========================================================= */
+
+function dontClick() {
+
+  openGame(`
+    <div class="emoji-title">🤨</div>
+
+    <h2>DO NOT CLICK THE BUTTON</h2>
+
+    <p>
+      Seriously.
+    </p>
+
+    <div class="dont-click-area">
+
+      <button
+        class="dont-button"
+        id="dontButton"
+        onclick="buttonPressed()">
+        DO NOT CLICK
+      </button>
+
+      <div class="click-count">
+        CLICKS: <span id="clickCount">0</span>
+      </div>
+
+      <div class="final-message"
+           id="buttonMessage">
+      </div>
+
+    </div>
+  `);
+
+  window.buttonClicks = 0;
+
+  window.buttonPressed = function() {
+
+    window.buttonClicks++;
+
+    let count = window.buttonClicks;
+
+    document.getElementById("clickCount")
+      .textContent = count;
+
+    let messages = [
+
+      "I told you not to.",
+      "Interesting choice.",
+      "You clicked it again.",
+      "This is becoming a pattern.",
+      "You could literally stop.",
+      "Why are you doing this?",
+      "There are other things on the internet.",
+      "You have committed to this now.",
+      "I am starting to question your decision-making.",
+      "Okay. I respect the dedication.",
+      "THIS BUTTON HAS DONE NOTHING FOR YOU.",
+      "And yet... here you are.",
+      "One more and I swear...",
+      "You know what? Fine.",
+      "I give up.",
+      "You win. 🏆"
+    ];
+
+    let message =
+      messages[Math.min(count - 1, messages.length - 1)];
+
+    document.getElementById("buttonMessage")
+      .textContent = message;
+
+    let button = document.getElementById("dontButton");
+
+    if (count === 5) {
+      button.textContent = "STOP.";
+    }
+
+    if (count === 10) {
+      button.textContent = "I'M SERIOUS.";
+      button.style.background = "#8e263d";
+    }
+
+    if (count === 15) {
+      button.textContent = "FINE. KEEP CLICKING.";
+      button.style.transform = "scale(.9)";
+    }
+
+    if (count >= 20) {
+      button.textContent = "YOU WIN 🏆";
+      button.style.background = "#8ee0bd";
+      button.style.color = "#111";
+    }
+  };
+}
+
+</script>
+
+</body>
+</html>
