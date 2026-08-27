@@ -194,7 +194,7 @@ button {
 }
 
 /* =========================
-   1. ANGRY BIRD GAME
+   1. ANGRY BIRD
 ========================= */
 
 #birdArea {
@@ -228,6 +228,7 @@ button {
   from {
     transform: scale(.2);
   }
+
   to {
     transform: scale(1);
   }
@@ -240,7 +241,7 @@ button {
 }
 
 /* =========================
-   2. MATCHING GAME
+   2. MATCHING
 ========================= */
 
 .memory-grid {
@@ -278,7 +279,7 @@ button {
 }
 
 /* =========================
-   3. DART GAME
+   3. DARTS
 ========================= */
 
 #dartArea {
@@ -297,6 +298,7 @@ button {
   height: 120px;
   border-radius: 50%;
   cursor: crosshair;
+
   background:
     radial-gradient(
       circle,
@@ -306,6 +308,7 @@ button {
       white 43% 62%,
       #e14b5a 62% 100%
     );
+
   box-shadow: 0 0 25px #0008;
 }
 
@@ -332,8 +335,10 @@ button {
   height: 400px;
   margin: 20px auto;
   overflow: hidden;
+
   border-left: 12px solid #777;
   border-right: 12px solid #777;
+
   background:
     repeating-linear-gradient(
       to bottom,
@@ -342,7 +347,9 @@ button {
       #eeeeee 45px,
       #eeeeee 85px
     );
+
   background-size: 100% 85px;
+
   animation: roadMove .7s linear infinite;
 }
 
@@ -365,15 +372,6 @@ button {
   position: absolute;
   font-size: 48px;
   z-index: 4;
-}
-
-.road-line {
-  position: absolute;
-  width: 8px;
-  height: 60px;
-  background: white;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .controls {
@@ -432,7 +430,7 @@ button {
 }
 
 /* =========================
-   RESPONSIVE
+   MOBILE
 ========================= */
 
 @media(max-width:650px) {
@@ -465,11 +463,13 @@ button {
 </style>
 </head>
 
+
 <body>
 
-<!-- =========================
-     HOME
-========================= -->
+
+<!-- =====================================================
+     HOME PAGE
+===================================================== -->
 
 <section id="home">
 
@@ -487,36 +487,91 @@ button {
     Pick your current condition and we'll deal with it accordingly.
   </p>
 
+
   <div class="moods">
 
     <button class="mood" onclick="startGame('angry')">
-      <div class="emoji">😤</div>
-      <strong>I'm annoyed</strong>
-      <span>There are birds. They need to be clicked.</span>
+
+      <div class="emoji">
+        😤
+      </div>
+
+      <strong>
+        I'm annoyed
+      </strong>
+
+      <span>
+        There are birds. They need to be clicked.
+      </span>
+
     </button>
+
 
     <button class="mood" onclick="startGame('matching')">
-      <div class="emoji">🥱</div>
-      <strong>I'm tired</strong>
-      <span>Flip things. Find the matching pairs.</span>
+
+      <div class="emoji">
+        🥱
+      </div>
+
+      <strong>
+        I'm tired
+      </strong>
+
+      <span>
+        Flip things. Find the matching pairs.
+      </span>
+
     </button>
+
 
     <button class="mood" onclick="startGame('darts')">
-      <div class="emoji">🫠</div>
-      <strong>Everything sucks</strong>
-      <span>Take aim. Throw things at targets.</span>
+
+      <div class="emoji">
+        🫠
+      </div>
+
+      <strong>
+        Everything sucks
+      </strong>
+
+      <span>
+        Take aim. Throw things at targets.
+      </span>
+
     </button>
+
 
     <button class="mood" onclick="startGame('racing')">
-      <div class="emoji">😐</div>
-      <strong>I'm bored</strong>
-      <span>Get in the car. Try not to crash.</span>
+
+      <div class="emoji">
+        😐
+      </div>
+
+      <strong>
+        I'm bored
+      </strong>
+
+      <span>
+        Get in the car. Try not to crash.
+      </span>
+
     </button>
 
+
     <button class="mood" onclick="startGame('button')">
-      <div class="emoji">🤷</div>
-      <strong>I don't even know</strong>
-      <span>Whatever you do, don't click the button.</span>
+
+      <div class="emoji">
+        🤷
+      </div>
+
+      <strong>
+        I don't even know
+      </strong>
+
+      <span>
+        Whatever you do, don't click the button.
+      </span>
+
     </button>
 
   </div>
@@ -524,9 +579,10 @@ button {
 </section>
 
 
-<!-- =========================
+
+<!-- =====================================================
      GAME SCREEN
-========================= -->
+===================================================== -->
 
 <section id="gameScreen" class="hidden">
 
@@ -539,47 +595,78 @@ button {
 </section>
 
 
+
 <script>
 
-/* =========================
-   GENERAL
-========================= */
+/* =====================================================
+   GENERAL FUNCTIONS
+===================================================== */
 
-let game = document.getElementById("game");
-let gameScreen = document.getElementById("gameScreen");
-let home = document.getElementById("home");
+const home = document.getElementById("home");
+const gameScreen = document.getElementById("gameScreen");
+const game = document.getElementById("game");
+
 
 function openGame(content) {
+
   home.classList.add("hidden");
+
   gameScreen.classList.remove("hidden");
+
   game.innerHTML = content;
 }
 
+
 function goHome() {
+
   gameScreen.classList.add("hidden");
+
   home.classList.remove("hidden");
+
 }
+
 
 function startGame(type) {
 
-  if (type === "angry") angryBirds();
-  if (type === "matching") matchingGame();
-  if (type === "darts") dartGame();
-  if (type === "racing") racingGame();
-  if (type === "button") dontClick();
+  if (type === "angry") {
+    angryBirds();
+  }
+
+  else if (type === "matching") {
+    matchingGame();
+  }
+
+  else if (type === "darts") {
+    dartGame();
+  }
+
+  else if (type === "racing") {
+    racingGame();
+  }
+
+  else if (type === "button") {
+    dontClick();
+  }
+
 }
 
 
-/* =========================================================
+
+/* =====================================================
    1. ANGRY BIRD CLICKING
-========================================================= */
+===================================================== */
 
 function angryBirds() {
 
   openGame(`
-    <div class="emoji-title">🐦</div>
 
-    <h2>DESTROY THE ANGRY BIRDS</h2>
+    <div class="emoji-title">
+      🐦
+    </div>
+
+    <h2>
+      DESTROY THE ANGRY BIRDS
+    </h2>
 
     <p>
       You have 25 seconds.<br>
@@ -587,67 +674,95 @@ function angryBirds() {
     </p>
 
     <div class="timer">
-      TIME: <span id="birdTimer">25</span>
+      TIME:
+      <span id="birdTimer">25</span>
     </div>
 
     <div class="score">
-      SCORE: <span id="birdScore">0</span>
+      SCORE:
+      <span id="birdScore">0</span>
     </div>
 
     <div class="combo">
-      COMBO: <span id="combo">0</span>
+      COMBO:
+      <span id="combo">0</span>
     </div>
 
     <div id="birdArea"></div>
+
   `);
 
-  let area = document.getElementById("birdArea");
+
+  const area = document.getElementById("birdArea");
+
   let score = 0;
   let combo = 0;
   let time = 25;
 
+
   function spawnBird() {
 
-    let bird = document.createElement("button");
+    const bird = document.createElement("button");
 
     bird.className = "bird";
 
-    let birds = ["🐦", "🐤", "🐧", "🦜"];
+    const birds = [
+      "🐦",
+      "🐤",
+      "🐧",
+      "🦜"
+    ];
 
     bird.textContent =
       birds[Math.floor(Math.random() * birds.length)];
 
+
     bird.style.left =
       Math.random() * (area.clientWidth - 70) + "px";
+
 
     bird.style.top =
       Math.random() * (area.clientHeight - 70) + "px";
 
+
     bird.onclick = function() {
 
       score++;
+
       combo++;
 
-      document.getElementById("birdScore").textContent = score;
-      document.getElementById("combo").textContent = combo;
+      document.getElementById("birdScore")
+        .textContent = score;
+
+      document.getElementById("combo")
+        .textContent = combo;
 
       bird.remove();
 
       spawnBird();
+
     };
 
+
     area.appendChild(bird);
+
   }
+
 
   for (let i = 0; i < 5; i++) {
+
     spawnBird();
+
   }
 
-  let timer = setInterval(function() {
+
+  const timer = setInterval(function() {
 
     time--;
 
-    document.getElementById("birdTimer").textContent = time;
+    document.getElementById("birdTimer")
+      .textContent = time;
+
 
     if (time <= 0) {
 
@@ -655,49 +770,85 @@ function angryBirds() {
 
       area.innerHTML = "";
 
+
       let message;
 
+
       if (score >= 50) {
-        message = "WHAT DID THOSE BIRDS EVER DO TO YOU? 😭";
-      } else if (score >= 30) {
-        message = "Okay. Those birds are definitely filing a complaint.";
-      } else if (score >= 15) {
-        message = "Respectable bird destruction.";
-      } else {
-        message = "The birds survived. Barely.";
+
+        message =
+          "WHAT DID THOSE BIRDS EVER DO TO YOU? 😭";
+
       }
 
-      game.innerHTML = `
-        <div class="emoji-title">💥</div>
+      else if (score >= 30) {
 
-        <h2>MISSION COMPLETE</h2>
+        message =
+          "Okay. Those birds are definitely filing a complaint.";
+
+      }
+
+      else if (score >= 15) {
+
+        message =
+          "Respectable bird destruction.";
+
+      }
+
+      else {
+
+        message =
+          "The birds survived. Barely.";
+
+      }
+
+
+      game.innerHTML = `
+
+        <div class="emoji-title">
+          💥
+        </div>
+
+        <h2>
+          MISSION COMPLETE
+        </h2>
 
         <div class="result">
           ${score} birds clicked.
         </div>
 
-        <p>${message}</p>
+        <p>
+          ${message}
+        </p>
 
         <br>
 
-        <button class="big-button"
-                onclick="angryBirds()">
+        <button
+          class="big-button"
+          onclick="angryBirds()">
+
           DESTROY MORE BIRDS
+
         </button>
+
       `;
+
     }
 
   }, 1000);
+
 }
 
 
-/* =========================================================
+
+/* =====================================================
    2. MATCHING PAIRS
-========================================================= */
+===================================================== */
 
 function matchingGame() {
 
   let symbols = [
+
     "🐸","🐸",
     "🍕","🍕",
     "🚗","🚗",
@@ -706,14 +857,22 @@ function matchingGame() {
     "🚀","🚀",
     "🍩","🍩",
     "👽","👽"
+
   ];
+
 
   symbols.sort(() => Math.random() - 0.5);
 
-  openGame(`
-    <div class="emoji-title">🧠</div>
 
-    <h2>MATCHING MAYHEM</h2>
+  openGame(`
+
+    <div class="emoji-title">
+      🧠
+    </div>
+
+    <h2>
+      MATCHING MAYHEM
+    </h2>
 
     <p>
       Flip two cards.<br>
@@ -721,24 +880,40 @@ function matchingGame() {
     </p>
 
     <div class="score">
-      MATCHES: <span id="matches">0</span>/8
+
+      MATCHES:
+      <span id="matches">0</span>/8
+
     </div>
 
-    <div class="memory-grid" id="memoryGrid"></div>
+    <div
+      class="memory-grid"
+      id="memoryGrid">
+    </div>
 
     <div id="memoryMessage"></div>
+
   `);
 
-  let grid = document.getElementById("memoryGrid");
+
+  const grid =
+    document.getElementById("memoryGrid");
+
 
   let first = null;
+
   let second = null;
+
   let locked = false;
+
   let matches = 0;
+
 
   symbols.forEach(symbol => {
 
-    let card = document.createElement("button");
+    const card =
+      document.createElement("button");
+
 
     card.className = "card";
 
@@ -746,26 +921,36 @@ function matchingGame() {
 
     card.dataset.symbol = symbol;
 
+
     card.onclick = function() {
 
       if (locked) return;
 
-      if (card.classList.contains("matched")) return;
+      if (card.classList.contains("matched")) {
+        return;
+      }
 
-      if (card === first) return;
+      if (card === first) {
+        return;
+      }
+
 
       card.classList.add("flipped");
+
 
       if (!first) {
 
         first = card;
 
         return;
+
       }
+
 
       second = card;
 
       locked = true;
+
 
       if (
         first.dataset.symbol ===
@@ -773,21 +958,28 @@ function matchingGame() {
       ) {
 
         first.classList.add("matched");
+
         second.classList.add("matched");
 
         matches++;
 
+
         document.getElementById("matches")
           .textContent = matches;
 
+
         first = null;
+
         second = null;
 
         locked = false;
 
+
         if (matches === 8) {
 
-          document.getElementById("memoryMessage").innerHTML = `
+          document.getElementById(
+            "memoryMessage"
+          ).innerHTML = `
 
             <div class="result">
               🧠 BRAIN FUNCTION CONFIRMED.
@@ -799,44 +991,64 @@ function matchingGame() {
 
             <br>
 
-            <button class="big-button"
-                    onclick="matchingGame()">
+            <button
+              class="big-button"
+              onclick="matchingGame()">
+
               PLAY AGAIN
+
             </button>
+
           `;
+
         }
 
-      } else {
+      }
+
+      else {
 
         setTimeout(function() {
 
           first.classList.remove("flipped");
+
           second.classList.remove("flipped");
 
           first = null;
+
           second = null;
 
           locked = false;
 
         }, 700);
+
       }
+
     };
 
+
     grid.appendChild(card);
+
   });
+
 }
 
 
-/* =========================================================
+
+/* =====================================================
    3. ARROWS + DARTS
-========================================================= */
+===================================================== */
 
 function dartGame() {
 
   openGame(`
-    <div class="emoji-title">🏹</div>
 
-    <h2>TARGET PRACTICE</h2>
+    <div class="emoji-title">
+      🏹
+    </div>
+
+    <h2>
+      TARGET PRACTICE
+    </h2>
 
     <p>
       Hit the target before it moves.<br>
@@ -844,128 +1056,194 @@ function dartGame() {
     </p>
 
     <div class="score">
-      HITS: <span id="dartScore">0</span>/15
+
+      HITS:
+      <span id="dartScore">0</span>/15
+
     </div>
 
     <div class="timer">
-      TIME: <span id="dartTimer">30</span>
+
+      TIME:
+      <span id="dartTimer">30</span>
+
     </div>
 
-    <div class="dart-message" id="dartMessage">
+    <div
+      class="dart-message"
+      id="dartMessage">
+
       AIM...
+
     </div>
 
     <div id="dartArea"></div>
+
   `);
 
-  let area = document.getElementById("dartArea");
+
+  const area =
+    document.getElementById("dartArea");
+
 
   let score = 0;
+
   let time = 30;
+
 
   function placeTarget() {
 
-    let target = document.createElement("div");
+    const target =
+      document.createElement("div");
 
-    target.className = "dart-target";
+
+    target.className =
+      "dart-target";
+
 
     target.style.left =
-      Math.random() * (area.clientWidth - 120) + "px";
+      Math.random() *
+      (area.clientWidth - 120) +
+      "px";
+
 
     target.style.top =
-      Math.random() * (area.clientHeight - 120) + "px";
+      Math.random() *
+      (area.clientHeight - 120) +
+      "px";
+
 
     target.onclick = function(event) {
 
-      let arrow = document.createElement("div");
+      const arrow =
+        document.createElement("div");
+
 
       arrow.className = "arrow";
 
       arrow.textContent = "🏹";
 
+
       arrow.style.left = "20px";
+
       arrow.style.top =
         event.offsetY + "px";
 
+
       area.appendChild(arrow);
 
-      setTimeout(() => {
+
+      setTimeout(function() {
+
         arrow.style.left =
           target.offsetLeft + 35 + "px";
 
         arrow.style.top =
           target.offsetTop + 35 + "px";
+
       }, 10);
 
-      setTimeout(() => {
+
+      setTimeout(function() {
 
         arrow.remove();
 
+
         score++;
+
 
         document.getElementById("dartScore")
           .textContent = score;
 
+
         document.getElementById("dartMessage")
           .textContent =
           score % 5 === 0
-          ? "🔥 BULLSEYE STREAK!"
-          : "🎯 NICE SHOT!";
+            ? "🔥 BULLSEYE STREAK!"
+            : "🎯 NICE SHOT!";
+
 
         target.remove();
+
 
         if (score >= 15) {
 
           clearInterval(timer);
 
-          game.innerHTML = `
-            <div class="emoji-title">🏆</div>
 
-            <h2>TARGETS DEFEATED</h2>
+          game.innerHTML = `
+
+            <div class="emoji-title">
+              🏆
+            </div>
+
+            <h2>
+              TARGETS DEFEATED
+            </h2>
 
             <div class="result">
               15 / 15
             </div>
 
             <p>
-              Absolutely unnecessary levels of accuracy.
+              Absolutely unnecessary levels
+              of accuracy.
             </p>
 
             <br>
 
-            <button class="big-button"
-                    onclick="dartGame()">
+            <button
+              class="big-button"
+              onclick="dartGame()">
+
               SHOOT AGAIN
+
             </button>
+
           `;
 
           return;
+
         }
 
+
         placeTarget();
-      };
+
+      }, 350);
+
     };
 
+
     area.appendChild(target);
+
   }
+
 
   placeTarget();
 
-  let timer = setInterval(function() {
+
+  const timer = setInterval(function() {
 
     time--;
 
     document.getElementById("dartTimer")
       .textContent = time;
 
+
     if (time <= 0) {
 
       clearInterval(timer);
 
-      game.innerHTML = `
-        <div class="emoji-title">💀</div>
 
-        <h2>TIME'S UP</h2>
+      game.innerHTML = `
+
+        <div class="emoji-title">
+          💀
+        </div>
+
+        <h2>
+          TIME'S UP
+        </h2>
 
         <div class="result">
           ${score} / 15
@@ -977,27 +1255,39 @@ function dartGame() {
 
         <br>
 
-        <button class="big-button"
-                onclick="dartGame()">
+        <button
+          class="big-button"
+          onclick="dartGame()">
+
           RUN IT BACK
+
         </button>
+
       `;
+
     }
 
   }, 1000);
+
 }
 
 
-/* =========================================================
+
+/* =====================================================
    4. CAR RACING
-========================================================= */
+===================================================== */
 
 function racingGame() {
 
   openGame(`
-    <div class="emoji-title">🏎️</div>
 
-    <h2>EMERGENCY GRAND PRIX</h2>
+    <div class="emoji-title">
+      🏎️
+    </div>
+
+    <h2>
+      EMERGENCY GRAND PRIX
+    </h2>
 
     <p>
       Avoid the traffic.<br>
@@ -1005,195 +1295,327 @@ function racingGame() {
     </p>
 
     <div class="score">
-      DISTANCE: <span id="distance">0</span> m
+
+      DISTANCE:
+      <span id="distance">0</span> m
+
     </div>
+
 
     <div id="raceArea">
 
-      <div class="car" id="playerCar">
+      <div
+        class="car"
+        id="playerCar">
+
         🏎️
+
       </div>
 
     </div>
 
+
     <div class="controls">
 
-      <button class="control"
-              onclick="moveCar(-1)">
+      <button
+        class="control"
+        onclick="moveCar(-1)">
+
         ◀
+
       </button>
 
-      <button class="control"
-              onclick="moveCar(1)">
+
+      <button
+        class="control"
+        onclick="moveCar(1)">
+
         ▶
+
       </button>
 
     </div>
 
+
     <p class="tiny">
       Keyboard: use ← and →
     </p>
+
   `);
 
-  let area = document.getElementById("raceArea");
-  let car = document.getElementById("playerCar");
+
+  const area =
+    document.getElementById("raceArea");
+
+
+  const car =
+    document.getElementById("playerCar");
+
 
   let lane = 1;
+
   let distance = 0;
+
   let running = true;
 
-  let lanes = [18, 43, 68];
 
-  car.style.left = lanes[lane] + "%";
+  const lanes = [
+    18,
+    50,
+    82
+  ];
+
+
+  car.style.left =
+    lanes[lane] + "%";
+
 
   window.moveCar = function(direction) {
 
     if (!running) return;
 
+
     lane += direction;
 
-    if (lane < 0) lane = 0;
-    if (lane > 2) lane = 2;
 
-    car.style.left = lanes[lane] + "%";
+    if (lane < 0) {
+      lane = 0;
+    }
+
+
+    if (lane > 2) {
+      lane = 2;
+    }
+
+
+    car.style.left =
+      lanes[lane] + "%";
+
   };
+
 
   document.onkeydown = function(event) {
 
     if (event.key === "ArrowLeft") {
+
       moveCar(-1);
+
     }
 
+
     if (event.key === "ArrowRight") {
+
       moveCar(1);
+
     }
+
   };
+
 
   function spawnEnemy() {
 
     if (!running) return;
 
-    let enemy = document.createElement("div");
+
+    const enemy =
+      document.createElement("div");
+
 
     enemy.className = "enemy-car";
 
-    enemy.textContent =
-      ["🚙","🚕","🚓","🚗"][Math.floor(Math.random() * 4)];
 
-    let enemyLane =
+    const cars = [
+      "🚙",
+      "🚕",
+      "🚓",
+      "🚗"
+    ];
+
+
+    enemy.textContent =
+      cars[Math.floor(Math.random() * cars.length)];
+
+
+    const enemyLane =
       Math.floor(Math.random() * 3);
+
 
     enemy.style.left =
       lanes[enemyLane] + "%";
 
-    enemy.style.top = "-60px";
+
+    enemy.style.top = "-70px";
+
 
     area.appendChild(enemy);
 
-    let position = -60;
 
-    let movement = setInterval(function() {
+    let position = -70;
+
+
+    const movement =
+      setInterval(function() {
+
+        if (!running) {
+
+          clearInterval(movement);
+
+          enemy.remove();
+
+          return;
+
+        }
+
+
+        position += 6;
+
+
+        enemy.style.top =
+          position + "px";
+
+
+        const carRect =
+          car.getBoundingClientRect();
+
+
+        const enemyRect =
+          enemy.getBoundingClientRect();
+
+
+        const collision =
+
+          carRect.left <
+          enemyRect.right &&
+
+          carRect.right >
+          enemyRect.left &&
+
+          carRect.top <
+          enemyRect.bottom &&
+
+          carRect.bottom >
+          enemyRect.top;
+
+
+        if (collision) {
+
+          running = false;
+
+          clearInterval(movement);
+
+
+          game.innerHTML = `
+
+            <div class="emoji-title">
+              💥
+            </div>
+
+            <h2>
+              YOU CRASHED
+            </h2>
+
+            <div class="result">
+              ${distance} metres
+            </div>
+
+            <p>
+              The insurance company
+              has been notified.
+            </p>
+
+            <br>
+
+            <button
+              class="big-button"
+              onclick="racingGame()">
+
+              DRIVE AGAIN
+
+            </button>
+
+          `;
+
+          return;
+
+        }
+
+
+        if (position > 450) {
+
+          clearInterval(movement);
+
+          enemy.remove();
+
+        }
+
+      }, 40);
+
+  }
+
+
+  const distanceTimer =
+    setInterval(function() {
 
       if (!running) {
 
-        clearInterval(movement);
-        enemy.remove();
+        clearInterval(distanceTimer);
 
         return;
+
       }
 
-      position += 5;
 
-      enemy.style.top = position + "px";
+      distance += 10;
 
-      let carRect = car.getBoundingClientRect();
-      let enemyRect = enemy.getBoundingClientRect();
 
-      let collision =
-        carRect.left < enemyRect.right &&
-        carRect.right > enemyRect.left &&
-        carRect.top < enemyRect.bottom &&
-        carRect.bottom > enemyRect.top;
+      document.getElementById("distance")
+        .textContent = distance;
 
-      if (collision) {
 
-        running = false;
-        clearInterval(movement);
+    }, 500);
 
-        game.innerHTML = `
-          <div class="emoji-title">💥</div>
 
-          <h2>YOU CRASHED</h2>
+  const enemyTimer =
+    setInterval(function() {
 
-          <div class="result">
-            ${distance} metres
-          </div>
+      if (!running) {
 
-          <p>
-            The insurance company has been notified.
-          </p>
+        clearInterval(enemyTimer);
 
-          <br>
+        return;
 
-          <button class="big-button"
-                  onclick="racingGame()">
-            DRIVE AGAIN
-          </button>
-        `;
       }
 
-      if (position > 430) {
 
-        clearInterval(movement);
-        enemy.remove();
-      }
+      spawnEnemy();
 
-    }, 40);
-  }
 
-  let distanceTimer = setInterval(function() {
+    }, 850);
 
-    if (!running) {
-
-      clearInterval(distanceTimer);
-      return;
-    }
-
-    distance += 10;
-
-    document.getElementById("distance")
-      .textContent = distance;
-
-  }, 500);
-
-  let enemyTimer = setInterval(function() {
-
-    if (!running) {
-
-      clearInterval(enemyTimer);
-      return;
-    }
-
-    spawnEnemy();
-
-  }, 900);
 }
 
 
-/* =========================================================
+
+/* =====================================================
    5. DON'T CLICK THE BUTTON
-========================================================= */
+===================================================== */
 
 function dontClick() {
 
   openGame(`
-    <div class="emoji-title">🤨</div>
 
-    <h2>DO NOT CLICK THE BUTTON</h2>
+    <div class="emoji-title">
+      🤨
+    </div>
+
+    <h2>
+      DO NOT CLICK THE BUTTON
+    </h2>
 
     <p>
       Seriously.
     </p>
+
 
     <div class="dont-click-area">
 
@@ -1201,79 +1623,145 @@ function dontClick() {
         class="dont-button"
         id="dontButton"
         onclick="buttonPressed()">
+
         DO NOT CLICK
+
       </button>
 
+
       <div class="click-count">
-        CLICKS: <span id="clickCount">0</span>
+
+        CLICKS:
+        <span id="clickCount">0</span>
+
       </div>
 
-      <div class="final-message"
-           id="buttonMessage">
+
+      <div
+        class="final-message"
+        id="buttonMessage">
       </div>
 
     </div>
+
   `);
 
+
   window.buttonClicks = 0;
+
 
   window.buttonPressed = function() {
 
     window.buttonClicks++;
 
-    let count = window.buttonClicks;
+
+    const count =
+      window.buttonClicks;
+
 
     document.getElementById("clickCount")
       .textContent = count;
 
-    let messages = [
+
+    const messages = [
 
       "I told you not to.",
+
       "Interesting choice.",
+
       "You clicked it again.",
+
       "This is becoming a pattern.",
+
       "You could literally stop.",
+
       "Why are you doing this?",
+
       "There are other things on the internet.",
+
       "You have committed to this now.",
+
       "I am starting to question your decision-making.",
+
       "Okay. I respect the dedication.",
+
       "THIS BUTTON HAS DONE NOTHING FOR YOU.",
+
       "And yet... here you are.",
+
       "One more and I swear...",
+
       "You know what? Fine.",
+
       "I give up.",
+
       "You win. 🏆"
+
     ];
 
-    let message =
-      messages[Math.min(count - 1, messages.length - 1)];
+
+    const message =
+      messages[
+        Math.min(
+          count - 1,
+          messages.length - 1
+        )
+      ];
+
 
     document.getElementById("buttonMessage")
       .textContent = message;
 
-    let button = document.getElementById("dontButton");
+
+    const button =
+      document.getElementById("dontButton");
+
 
     if (count === 5) {
-      button.textContent = "STOP.";
+
+      button.textContent =
+        "STOP.";
+
     }
+
 
     if (count === 10) {
-      button.textContent = "I'M SERIOUS.";
-      button.style.background = "#8e263d";
+
+      button.textContent =
+        "I'M SERIOUS.";
+
+      button.style.background =
+        "#8e263d";
+
     }
+
 
     if (count === 15) {
-      button.textContent = "FINE. KEEP CLICKING.";
-      button.style.transform = "scale(.9)";
+
+      button.textContent =
+        "FINE. KEEP CLICKING.";
+
+      button.style.transform =
+        "scale(.9)";
+
     }
 
+
     if (count >= 20) {
-      button.textContent = "YOU WIN 🏆";
-      button.style.background = "#8ee0bd";
-      button.style.color = "#111";
+
+      button.textContent =
+        "YOU WIN 🏆";
+
+      button.style.background =
+        "#8ee0bd";
+
+      button.style.color =
+        "#111";
+
     }
+
   };
+
 }
 
 </script>
