@@ -3,6 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- =========================
+       VISITOR ANALYTICS
+       Replace G-XXXXXXXXXX with your Google Analytics 4
+       Measurement ID after creating your Analytics property.
+  ========================== -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-XXXXXXXXXX', {
+      anonymize_ip: true
+    });
+
+    // Track which mood/game the visitor opens.
+    window.trackGame = function(type) {
+      gtag('event', 'game_started', {
+        game_type: type
+      });
+    };
+  </script>
+
 <title>The Emergency Button 🎮</title>
 
 <style>
@@ -627,6 +650,10 @@ function goHome() {
 
 
 function startGame(type) {
+
+  if (typeof window.trackGame === "function") {
+    window.trackGame(type);
+  }
 
   if (type === "angry") {
     angryBirds();
